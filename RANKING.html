@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Tablero de Ranking</title>
+  <style>
+    #rankings div {
+      margin: 5px 0;
+    }
+  </style>
+</head>
+<body>
+  <h1>Tablero de Ranking</h1>
+  <iframe id="rankingFrame" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vSr0dkkda_GehBat4bIA4GXaebghItlE4IPqC3Wcxb7WT70CQNlhwLKvB85ZuQeVhcbBlzq0jN7Rcx4/pubhtml" width="100%" height="400"></iframe>
+  <div id="rankings"></div>
+
+  <script>
+    function updateRanking(name, points) {
+      var rankings = document.getElementById('rankings');
+      var updated = false;
+      
+      for (var i = 0; i < rankings.children.length; i++) {
+        var item = rankings.children[i];
+        if (item.dataset.name == name) {
+          item.innerText = name + ': ' + points;
+          updated = true;
+          break;
+        }
+      }
+      
+      if (!updated) {
+        var newItem = document.createElement('div');
+        newItem.dataset.name = name;
+        newItem.innerText = name + ': ' + points;
+        rankings.appendChild(newItem);
+      }
+    }
+  </script>
+</body>
+</html>
